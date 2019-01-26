@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
     private float _bulletSpawnTimer;
 
+    private Vector3 spawnPos;
+
     // Initialized via Start()
     private HomeArea _homeArea;
     private List<FamilyMember> _family;
@@ -81,8 +83,25 @@ public class GameManager : MonoBehaviour
     // Method used to spawn a bullet
     private void SpawnBullet()
     {
-        // create random spawn location that's not in the camera view
-        Vector3 spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(-0.2f, 1.2f), Random.Range(-0.2f, 1.2f), 10.0f));
+        
+        float _spawnDirection = Random.Range(0.0f, 1.0f);
+        if(_spawnDirection <= 0.25f) //left
+        {
+            spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(-0.2f, Random.Range(0.0f, 1.0f), 10.0f));
+        }
+        else if (_spawnDirection <= 0.5f && _spawnDirection > 0.25f) //right
+        {
+            spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(1.2f, Random.Range(0.0f, 1.0f), 10.0f));
+        }
+        else if (_spawnDirection <= 0.75f && _spawnDirection > .5f) //up
+        {
+            spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.0f, 1.0f), 1.2f, 10.0f));
+        }
+        else if (_spawnDirection <= 1.0f && _spawnDirection > 0.75f) //down
+        {
+            spawnPos = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.0f, 1.0f), -0.2f, 10.0f));
+        }
+        
         // create a random destination point that takes the bullet through the camera view
         Vector3 destination = Camera.main.ViewportToWorldPoint(new Vector3(Random.Range(0.2f, 0.8f), Random.Range(0.2f, 0.8f), 10.0f));
         // pick a random bullet speed in range
