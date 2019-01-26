@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Global : MonoBehaviour
 {
-    
-
     public static Global Instance; //Creates a new instance if one does not yet exist
 
     void Awake()
     {
-        if (Instance == null) 
+        if (Instance == null)
         {
             DontDestroyOnLoad(gameObject); //makes instance persist across scenes
             Instance = this;
