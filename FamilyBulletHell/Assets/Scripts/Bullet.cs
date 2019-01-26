@@ -7,21 +7,25 @@ public class Bullet : MonoBehaviour
     private Vector3 _direction;
     private float _speed;
     private int _damage;
+    private Material BulletColor;
 
     public void Spawn(Vector3 spawnPosition, Vector3 destination, float projectileSpeed)
     {
         gameObject.transform.position = spawnPosition;
         _direction = Vector3.Normalize(destination - spawnPosition);
         _speed = projectileSpeed;
-        if(Random.Range(0.0f, 1.0f) <= Global.Instance.BulletHealChance)
+        float _BulletHeal = Random.Range(0.0f, 1.0f);
+        if(_BulletHeal <= Global.Instance.BulletHealChance)
         {
-            _speed -= _speed*2.0f;
-            _damage = (int)(Global.Instance.BulletDamageSpeedFactor / _speed);
+            _damage = (int)(Global.Instance.BulletHealAmount);
+            BulletColor = GetComponent<Renderer>().material;
+            BulletColor.color = Color.green;
         }
-        
-        else
+        else if(_BulletHeal > Global.Instance.BulletHealChance)
         {
             _damage = (int)(Global.Instance.BulletDamageSpeedFactor / _speed);
+            BulletColor = GetComponent<Renderer>().material;
+            BulletColor.color = Color.black;
         }
     }
 
