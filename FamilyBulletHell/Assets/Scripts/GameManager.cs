@@ -56,15 +56,18 @@ public class GameManager : MonoBehaviour
 
         _goals = new List<GoalArea>();
 
-        GameObject area = Instantiate(goalAreaObject);
-        float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
-        area.transform.localScale = new Vector3(radius, 0.5f, radius);
-        float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
-        int posIndex = Random.Range(0, _possiblePositions.Count);
-        area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
-        area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
-        area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
-        _goals.Add(area.GetComponent<GoalArea>());
+        for (int i = 0; i < 2; ++i)
+        {
+            GameObject area = Instantiate(goalAreaObject);
+            float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
+            area.transform.localScale = new Vector3(radius, 0.5f, radius);
+            float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
+            int posIndex = Random.Range(0, _possiblePositions.Count);
+            area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
+            area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
+            area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
+            _goals.Add(area.GetComponent<GoalArea>());
+        }
     }
 
 	void Gestate() {
@@ -187,6 +190,19 @@ public class GameManager : MonoBehaviour
     private void ActivateGoalArea(GoalArea area)
     {
         int positionIndex = Random.Range(0, _possiblePositions.Count);
+        bool badPos = false;
+        while (badPos)
+        {
+            badPos = false;
+            foreach (GoalArea goal in _goals)
+            {
+                if (_possiblePositions[positionIndex].Equals(goal.transform.position))
+                {
+                    badPos = true;
+                }
+            }
+        }
+
         float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
         float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
         area.transform.localScale = new Vector3(radius, 0.5f, radius);
