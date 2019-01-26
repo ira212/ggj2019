@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -143,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   childSpawnTimeMin: 2
   childSpawnTimeMax: 15
+  bulletSpeedMin: 15
+  bulletSpeedMax: 30
 --- !u!4 &26960411
 Transform:
   m_ObjectHideFlags: 0
@@ -358,6 +360,7 @@ GameObject:
   - component: {fileID: 1721847353}
   - component: {fileID: 1721847352}
   - component: {fileID: 1721847351}
+  - component: {fileID: 1721847357}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -466,6 +469,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1721847357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721847350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d27500449c6343047ac73093f3ec7968, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1728735999
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,6 +593,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   homeAreaObject: {fileID: 385107804}
+  bulletObject: {fileID: 6057687081685933947, guid: 5a7b31448b8be004c9d4290c1f540744,
+    type: 3}
+  _player: {fileID: 1721847350}
 --- !u!4 &2045332284
 Transform:
   m_ObjectHideFlags: 0

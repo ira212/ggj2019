@@ -6,9 +6,10 @@ public class GameManager : MonoBehaviour
 {
 	// set via drag-and-drop in the inspector
 	public GameObject homeAreaObject;
-    public GameObject _bulletObject;
+    public GameObject bulletObject;
 
     // Created somehow. These probably aren't going to be game object classes in the end
+    [SerializeField]
     private GameObject _player;
     private GameObject _coparent;
 
@@ -17,18 +18,20 @@ public class GameManager : MonoBehaviour
 
     // Initialized via Start()
     private HomeArea _homeArea;
+    private List<FamilyMember> _family;
 
 	// Start is called before the first frame update
     void Start()
     {
 
         // placeholder initialization
-        _player = new GameObject();
         _coparent = new GameObject();
 
         _homeArea = homeAreaObject.GetComponent<HomeArea>();
+        _family = new List<FamilyMember>();
 
         _player.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
+        _family.Add(_player.GetComponent<FamilyMember>());
     }
 
 	void Gestate() {
@@ -86,7 +89,7 @@ public class GameManager : MonoBehaviour
         // pick a random bullet speed in range
         float bulletSpeed = Random.Range(Global.Instance.bulletSpeedMin, Global.Instance.bulletSpeedMax);
 
-        GameObject newBullet = Instantiate(_bulletObject);
+        GameObject newBullet = Instantiate(bulletObject);
         newBullet.GetComponent<Bullet>().Spawn(spawnPos, destination, bulletSpeed);
     }
 
