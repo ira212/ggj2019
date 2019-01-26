@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     private float _speed;
     private int _damage;
     private Material BulletColor;
+    private float _timeInWorld;
 
     public void Spawn(Vector3 spawnPosition, Vector3 destination, float projectileSpeed)
     {
@@ -34,6 +35,11 @@ public class Bullet : MonoBehaviour
     {
         Vector3 newPos = transform.position + (_direction * _speed * Time.deltaTime);
         transform.position = newPos;
+        _timeInWorld = _timeInWorld + Time.deltaTime;
+        if(_timeInWorld >= 10.0f)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
