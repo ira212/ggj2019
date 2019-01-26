@@ -15,12 +15,6 @@ public class Shield : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void TakeDamage(int damageTaken)
     {
         _currentHealth -= damageTaken;
