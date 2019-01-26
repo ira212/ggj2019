@@ -107,6 +107,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // Lose the game.
+        SceneManager.LoadScene(sceneName: "GameOver");
     }
 
     // Update is called once per frame
