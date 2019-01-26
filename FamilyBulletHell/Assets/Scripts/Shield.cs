@@ -7,7 +7,7 @@ public class Shield : MonoBehaviour
     private int _maxHealth;
     private int _currentHealth;
     private float _respawnTimeLeft;
-    private bool _respawnActive;
+    private bool _shieldActive;
 
     // Start is called before the first frame update
     void Start()
@@ -27,20 +27,20 @@ public class Shield : MonoBehaviour
         if (_currentHealth <= 0)
         {
            gameObject.SetActive(false);
-           _respawnActive = true;
+           _shieldActive = false;
         }
     }
 
     public void ShieldRespawnTimer(float respawnTime)
     {
         _respawnTimeLeft = respawnTime;
-        while(_respawnActive == true)
+        while(_shieldActive == false)
         {
             _respawnTimeLeft -= Time.deltaTime;
             if(_respawnTimeLeft <= 0)
             {
                 gameObject.SetActive(true);
-                _respawnActive = false;
+                _shieldActive = true;
             }
         }
     }
