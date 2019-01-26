@@ -6,7 +6,7 @@ public class Shield : MonoBehaviour
 {
     private int _maxHealth;
     private int _currentHealth;
-    private int _respawnTime;
+    public int respawnTime;
     private float _respawnTimeLeft;
     private bool _respawnActive;
 
@@ -28,6 +28,20 @@ public class Shield : MonoBehaviour
         if (_currentHealth <= 0)
         {
            gameObject.SetActive(false);
+           _respawnActive = true;
+        }
+    }
+
+    public void ShieldRespawnTimer()
+    {
+        while(_respawnActive == true)
+        {
+            _respawnTimeLeft -= Time.deltaTime;
+            if(_respawnTimeLeft <= 0)
+            {
+                gameObject.SetActive(true);
+                _respawnActive = false;
+            }
         }
     }
 }
