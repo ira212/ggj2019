@@ -6,7 +6,6 @@ public class Shield : MonoBehaviour
 {
     private int _maxHealth;
     private int _currentHealth;
-    public int respawnTime;
     private float _respawnTimeLeft;
     private bool _respawnActive;
 
@@ -32,8 +31,9 @@ public class Shield : MonoBehaviour
         }
     }
 
-    public void ShieldRespawnTimer()
+    public void ShieldRespawnTimer(float respawnTime)
     {
+        _respawnTimeLeft = respawnTime;
         while(_respawnActive == true)
         {
             _respawnTimeLeft -= Time.deltaTime;
