@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
     {
-
         // placeholder initialization
         _coparent = new GameObject();
 
@@ -34,6 +33,12 @@ public class GameManager : MonoBehaviour
 
         _player.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
         _family.Add(_player.GetComponent<FamilyMember>());
+
+        // Spawn a random number of bullets at the start of the game. +1 on the second argument for Random.Range because if you give it ints, the 2nd argument is exclusive.
+        for (int i = Random.Range(Global.Instance.BulletStartSpawnMin, Global.Instance.BulletStartSpawnMax +1); i > 0; i--)
+        {
+            SpawnBullet();
+        }
     }
 
 	void Gestate() {
@@ -75,6 +80,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // Spawn bullet
         if (_bulletSpawnTimer > 0)
         {
             _bulletSpawnTimer -= Time.deltaTime;
@@ -85,6 +92,8 @@ public class GameManager : MonoBehaviour
 
             _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
         }
+
+
 		// check if we should be gestating a baby
 		Gestate();
 
