@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject bulletObject;
     public GameObject goalAreaObject;
     public GameObject healthMeter;
+    public GameObject scoreCounter;
 
     // Created somehow. These probably aren't going to be game object classes in the end
     [SerializeField]
@@ -27,6 +28,9 @@ public class GameManager : MonoBehaviour
     private Vector3 spawnPos;
 
     private Text _healthText;
+    private Text _scoreText;
+    private float _score;
+    private int _intScore;
 
     // Initialized via Start()
     private HomeArea _homeArea;
@@ -44,6 +48,9 @@ public class GameManager : MonoBehaviour
         _family = new List<FamilyMember>();
         SpawnPlayer();
         _healthText = healthMeter.GetComponent<Text>();
+        _scoreText = scoreCounter.GetComponent<Text>();
+        _score = 0.0f;
+        _intScore = 0;
 
         // Spawn a random number of bullets at the start of the game. +1 on the second argument for Random.Range because if you give it ints, the 2nd argument is exclusive.
         for (int i = Random.Range(Global.Instance.BulletStartSpawnMin, Global.Instance.BulletStartSpawnMax +1); i > 0; i--)
@@ -75,7 +82,6 @@ public class GameManager : MonoBehaviour
             _goals.Add(area.GetComponent<GoalArea>());
         }
     }
-
 
 	void Gestate() {
 	    // confirm that both parents are in the home area
@@ -236,6 +242,10 @@ public class GameManager : MonoBehaviour
 
             _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
         }
+
+        _score = _score + Time.deltaTime;
+        _intScore = (int)_score;
+        _scoreText.text ="Score: " + _intScore.ToString();
 
         _healthText.text = "Health: " + newPlayer.GetComponent<FamilyMember>().GetHealth().ToString();
         // check if we should be gestating a baby
