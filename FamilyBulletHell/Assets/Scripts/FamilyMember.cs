@@ -22,6 +22,8 @@ public class FamilyMember : MonoBehaviour
     public void TakeDamage(int damageTaken)
     {
         _currentHealth -= damageTaken;
+        Debug.Log("You took " + damageTaken + " damage.");
+        Debug.Log("You have " + _currentHealth + "health left.");
         if (_currentHealth <= 0)
         {
             OnFamilyMemberDeath?.Invoke();

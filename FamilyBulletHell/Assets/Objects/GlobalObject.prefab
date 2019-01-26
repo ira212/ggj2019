@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6859385857670639186
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6859385857670639184}
+  - component: {fileID: 6859385857670639185}
+  m_Layer: 0
+  m_Name: GlobalObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6859385857670639184
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859385857670639186}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.55690813, y: 0.34037614, z: -0.003768444}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6859385857670639185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6859385857670639186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538b0ab63c46c31418d8935ae667c6b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childSpawnTimeMin: 2
+  childSpawnTimeMax: 15
+  bulletSpeedMin: 15
+  bulletSpeedMax: 30
+  GoalAreaRadMin: 4
+  GoalAreaRadMax: 8
+  HomeAreaRadMin: 5
+  HomeAreaRadMax: 9
+  StartHP: 10
+  GoalAreaHeal: 5
+  ShieldRespawnTime: 8
+  ShieldHPmax: 20
+  BulletDamageSpeedFactor: 0.5
+  SquareScale: 4
+  TriangleScale: 4
+  BulletScale: 1.5
+  ChildScale: 2
+  BulletSpeedMin: 0.5
+  BulletSpeedMax: 3
+  SquareSpeed: 9.7
+  TriangleSpeed: 1
+  ChildSpeed: 1.2
+  TriangleAttSpan: 6
+  ChildAttenSpanMIn: 2
+  ChildAttenSpanMax: 4
+  BulletStartSpawnMin: 2
+  BulletStartSpawnMax: 3
+  NewBulletSpawnMin: 0.7
+  NewBulletSpawnMax: 2
+  SpawnFreqTimeFact: 0.95
+  TriangleArriveTimeMin: 5
+  TriangleArriveTimeMax: 10
+  SecndChildArriveTimeMin: 2
+  SecndChildArriveTimeMax: 15
