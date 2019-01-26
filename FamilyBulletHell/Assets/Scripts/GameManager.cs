@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
 	// set via drag-and-drop in the inspector
 	public GameObject homeAreaObject;
+    public GameObject _bulletObject;
 
     // Created somehow. These probably aren't going to be game object classes in the end
     private GameObject _player;
@@ -72,5 +73,19 @@ public class GameManager : MonoBehaviour
 		// check if we should be gestating a baby
 		Gestate();
 
+    }
+
+    // Method used to spawn a bullet
+    private void SpawnBullet()
+    {
+        // create random spawn location that's not in the camera view
+        Vector3 spawnPos = new Vector3();
+        // create a random destination point that takes the bullet through the camera view
+        Vector3 destination = new Vector3();
+        // pick a random bullet speed in range
+        float bulletSpeed = Random.Range(Global.Instance.bulletSpeedMin, Global.Instance.bulletSpeedMax);
+
+        GameObject newBullet = Instantiate(_bulletObject);
+        newBullet.GetComponent<Bullet>().Spawn(spawnPos, destination, bulletSpeed);
     }
 }

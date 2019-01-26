@@ -16,12 +16,6 @@ public class Bullet : MonoBehaviour
         _damage = (int)(_speed * 0.5f);
     }
 
-    private void Start()
-    {
-        _direction = new Vector3(transform.position.x, -25, 0);
-        _speed = 15;
-    }
-
     // Update is called once per frame
     void Update()
     {

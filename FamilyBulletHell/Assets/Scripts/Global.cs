@@ -23,5 +23,7 @@ public class Global : MonoBehaviour
 
     public float childSpawnTimeMin = 2.0f;
     public float childSpawnTimeMax = 15.0f;
- 
+
+    public float bulletSpeedMin = 15.0f;
+    public float bulletSpeedMax = 30.0f;
 }
