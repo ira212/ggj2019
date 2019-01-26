@@ -26,13 +26,4 @@ public class HomeArea : MonoBehaviour
             return false;
         }
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Player>() != null)
-        {
-            OnHomeAreaEntry?.Invoke();
-        }
-       
-    }
 }
