@@ -40,8 +40,8 @@ public class Global : MonoBehaviour
     public float ShieldRespawnTime = 8.0f;
     public float ShieldHPmax = 20.0f;
 
-    public float BulletDamageSpeedFactor = 0.5f;
-
+    public float BulletDamageSpeedFactor = 30.0f;
+    public float BulletHealChance = 0.1f;
 
     //relative sizes
     public float SquareScale = 4.0f;

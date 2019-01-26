@@ -13,7 +13,16 @@ public class Bullet : MonoBehaviour
         gameObject.transform.position = spawnPosition;
         _direction = Vector3.Normalize(destination - spawnPosition);
         _speed = projectileSpeed;
-        _damage = (int)(_speed * Global.Instance.BulletDamageSpeedFactor);
+        if(Random.Range(0.0f, 1.0f) <= Global.Instance.BulletHealChance)
+        {
+            _speed -= _speed*2.0f;
+            _damage = (int)(Global.Instance.BulletDamageSpeedFactor / _speed);
+        }
+        
+        else
+        {
+            _damage = (int)(Global.Instance.BulletDamageSpeedFactor / _speed);
+        }
     }
 
     // Update is called once per frame
