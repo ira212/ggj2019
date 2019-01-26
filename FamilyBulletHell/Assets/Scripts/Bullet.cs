@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     public void Spawn(Vector3 spawnPosition, Vector3 destination, float projectileSpeed)
     {
         gameObject.transform.position = spawnPosition;
-        _direction = destination;
+        _direction = Vector3.Normalize(destination - spawnPosition);
         _speed = projectileSpeed;
         _damage = (int)(_speed * 0.5f);
     }
