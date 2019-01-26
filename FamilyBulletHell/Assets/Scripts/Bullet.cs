@@ -8,15 +8,38 @@ public class Bullet : MonoBehaviour
     private float _speed;
     private int _damage;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Spawn(Vector3 spawnPosition, Vector3 destination, float projectileSpeed)
     {
-        
+        gameObject.transform.position = spawnPosition;
+        _direction = destination;
+        _speed = projectileSpeed;
+        _damage = (int)(_speed * 0.5f);
+    }
+
+    private void Start()
+    {
+        _direction = new Vector3(transform.position.x, -25, 0);
+        _speed = 15;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 newPos = new Vector3(transform.position.x, transform.position.y - _speed * Time.deltaTime, 0);
+        transform.position = newPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.GetComponent<Shield>() != null)
+        {
+
+        }
+        else if (collision.collider.GetComponent<FamilyMember>() != null)
+        {
+            collision.collider.GetComponent<FamilyMember>().TakeDamage(_damage);
+        }
+
+        Destroy(gameObject);
     }
 }

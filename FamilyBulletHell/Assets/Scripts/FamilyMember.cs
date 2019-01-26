@@ -8,17 +8,19 @@ public class FamilyMember : MonoBehaviour
     private int _currentHealth;
     private float _speed;
 
+    public void SpawnFamilyMember(int maxHP, float moveSpeed)
+    {
+        _maxHealth = maxHP;
+        _currentHealth = maxHP;
+        _speed = moveSpeed;
+    }
+
     public void TakeDamage(int damageTaken)
     {
         _currentHealth -= damageTaken;
         if (_currentHealth <= 0)
         {
-            Die();
+            Destroy(gameObject);
         }
-    }
-
-    private void Die()
-    {
-
     }
 }
