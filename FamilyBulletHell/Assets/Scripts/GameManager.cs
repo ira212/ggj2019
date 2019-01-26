@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private float _gestationTimer;
     private bool _gestating;
 
+    private float _bulletSpawnTimer;
+
     // Initialized via Start()
     private HomeArea _homeArea;
     private List<FamilyMember> _family;
@@ -73,7 +75,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (_bulletSpawnTimer > 0)
+        {
+            _bulletSpawnTimer -= Time.deltaTime;
+        }
+        if(_bulletSpawnTimer <= 0)
+        {
+            SpawnBullet();
+            _bulletSpawnTimer = 5.0f;
+        }
 		// check if we should be gestating a baby
 		Gestate();
 
