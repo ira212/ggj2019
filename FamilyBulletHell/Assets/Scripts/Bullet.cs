@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
 
         if (collision.collider.GetComponent<FamilyMember>() != null)
         {
+            Debug.Log("Collision!");
             collision.collider.GetComponent<FamilyMember>().TakeDamage(_damage);
             Destroy(gameObject);
         }        

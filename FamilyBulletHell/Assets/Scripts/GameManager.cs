@@ -82,7 +82,8 @@ public class GameManager : MonoBehaviour
         if(_bulletSpawnTimer <= 0)
         {
             SpawnBullet();
-            _bulletSpawnTimer = 5.0f;
+
+            _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
         }
 		// check if we should be gestating a baby
 		Gestate();
@@ -100,6 +101,7 @@ public class GameManager : MonoBehaviour
         float bulletSpeed = Random.Range(Global.Instance.bulletSpeedMin, Global.Instance.bulletSpeedMax);
 
         GameObject newBullet = Instantiate(bulletObject);
+        newBullet.transform.localScale = new Vector3(Global.Instance.BulletScale, Global.Instance.BulletScale, 1);
         newBullet.GetComponent<Bullet>().Spawn(spawnPos, destination, bulletSpeed);
     }
 
