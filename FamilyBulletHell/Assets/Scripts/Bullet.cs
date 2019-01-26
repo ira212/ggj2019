@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
         gameObject.transform.position = spawnPosition;
         _direction = Vector3.Normalize(destination - spawnPosition);
         _speed = projectileSpeed;
-        _damage = (int)(_speed * 0.5f);
+        _damage = (int)(_speed * Global.Instance.BulletDamageSpeedFactor);
     }
 
     // Update is called once per frame
