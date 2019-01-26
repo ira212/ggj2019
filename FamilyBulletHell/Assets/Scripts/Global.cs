@@ -63,8 +63,8 @@ public class Global : MonoBehaviour
     public float ChildAttenSpanMax = 4.0f;
 
     //number of bullets to spawn at the start of the game
-    public float BulletStartSpawnMin = 2.0f;
-    public float BulletStartSpawnMax = 5.0f;
+    public int BulletStartSpawnMin = 2;
+    public int BulletStartSpawnMax = 5;
     public float NewBulletSpawnMin = 0.5f;
     public float NewBulletSpawnMax = 2.0f;
     // every 1 minute, multiply min/max this factor
