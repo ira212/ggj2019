@@ -34,6 +34,11 @@ public class FamilyMember : MonoBehaviour
         }
     }
 
+    public int GetHealth()
+    {
+        return (_currentHealth);
+    }
+
     public bool IsParent()
     {
         return _isParent;
