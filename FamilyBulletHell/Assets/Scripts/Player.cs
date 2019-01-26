@@ -26,6 +26,6 @@ public class Player : MonoBehaviour
 
     void SpawnPlayer(Vector3 spawnPosition)
     {
-        FamilyMember.SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.SquareSpeed, true);
+        GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.SquareSpeed, true);
     }
 }
