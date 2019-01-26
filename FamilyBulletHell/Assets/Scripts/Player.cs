@@ -5,7 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 
-    public float speed;
     private Rigidbody _playerRB;
     
     // Start is called before the first frame update
@@ -22,6 +21,11 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        _playerRB.AddForce(movement * speed);
+        _playerRB.AddForce(movement * Global.Instance.SquareSpeed);
+    }
+
+    void SpawnPlayer(Vector3 spawnPosition)
+    {
+        FamilyMember.SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.SquareSpeed, true);
     }
 }

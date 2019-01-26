@@ -33,7 +33,7 @@ public class Global : MonoBehaviour
     public float HomeAreaRadMin = 5.0f;
     public float HomeAreaRadMax = 9.0f;
 
-    public float StartHP = 10.0f;
+    public int StartHP = 10;
     //1HP happens every X seconds. 1st heal starts at 5 seconds, not 0.
     public float GoalAreaHeal = 5.0f;
 
