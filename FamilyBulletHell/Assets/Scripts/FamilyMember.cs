@@ -28,6 +28,10 @@ public class FamilyMember : MonoBehaviour
         {
             OnFamilyMemberDeath?.Invoke();
         }
+        if (_currentHealth > _maxHealth)
+        {
+            _currentHealth = _maxHealth;
+        }
     }
 
     public bool IsParent()

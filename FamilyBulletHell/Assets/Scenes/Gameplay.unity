@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 385107808}
   - component: {fileID: 385107807}
   - component: {fileID: 385107806}
-  - component: {fileID: 385107805}
   m_Layer: 0
   m_Name: HomeAreaObject
   m_TagString: Untagged
@@ -133,19 +132,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &385107805
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385107804}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.99999994, y: 0.99999994, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &385107806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,7 +152,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385107804}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -224,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 385107804}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -20, y: 13, z: 5}
+  m_LocalPosition: {x: -20, y: 13, z: 0}
   m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -412,6 +398,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   homeAreaObject: {fileID: 385107804}
   bulletObject: {fileID: 6057687081685933947, guid: 5a7b31448b8be004c9d4290c1f540744,
+    type: 3}
+  goalAreaObject: {fileID: 7145049311852310088, guid: 4c1675355f1c8fa4e98a3a140b3601d1,
     type: 3}
   _player: {fileID: 8005480149281782990, guid: 2b17fc03a7cb2214ea3436a1712308a8, type: 3}
 --- !u!4 &2045332284

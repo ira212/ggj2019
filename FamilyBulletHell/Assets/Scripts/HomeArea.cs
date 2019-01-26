@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class HomeArea : MonoBehaviour
 {
-    public System.Action OnHomeAreaEntry;
     private Collider _homeAreaCollider;
 
     // Start is called before the first frame update
@@ -19,7 +18,7 @@ public class HomeArea : MonoBehaviour
         Collider myObjectCollider = myObject.GetComponent<Collider>();
 
         // check if myObject is within myself
-        if (myObjectCollider.bounds.Intersects(_homeAreaCollider.bounds))
+        if (myObjectCollider != null && myObjectCollider.bounds.Intersects(_homeAreaCollider.bounds))
         {
             return true;
         }

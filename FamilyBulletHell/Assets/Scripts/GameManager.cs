@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	// set via drag-and-drop in the inspector
 	public GameObject homeAreaObject;
     public GameObject bulletObject;
+    public GameObject goalAreaObject;
 
     // Created somehow. These probably aren't going to be game object classes in the end
     [SerializeField]
@@ -24,6 +25,7 @@ public class GameManager : MonoBehaviour
     // Initialized via Start()
     private HomeArea _homeArea;
     private List<FamilyMember> _family;
+    private List<GoalArea> _goals;
 
 	// Start is called before the first frame update
     void Start()
@@ -41,6 +43,14 @@ public class GameManager : MonoBehaviour
         {
             SpawnBullet();
         }
+
+        _goals = new List<GoalArea>();
+
+        GameObject area = Instantiate(goalAreaObject);
+        area.transform.localScale = new Vector3(5, 0.5f, 5);
+        area.GetComponent<GoalArea>().ActivateGoalArea(new Vector3(13.4f, 11.3f, 0), 100000, 3);
+        area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
+        _goals.Add(area.GetComponent<GoalArea>());
     }
 
 	void Gestate() {
@@ -123,10 +133,43 @@ public class GameManager : MonoBehaviour
         _family.Add(newPlayer.GetComponent<FamilyMember>());
     }
 
+    // Method to check goals
+    private void CheckGoals()
+    {
+        foreach (GoalArea goal in _goals)
+        {
+            if (goal.IsAreaActive())
+            {
+                if (goal.Contains(_family[0].gameObject))
+                {
+                    if (!goal.IsHealingActive())
+                    {
+                        goal.ActivateHealing();
+                    }
+                }
+                else
+                {
+                    if (goal.IsHealingActive())
+                    {
+                        goal.DeactivateHealing();
+                    }
+                }
+            }
+        }
+    }
+
+    private void GoalAreaHeal()
+    {
+        foreach (FamilyMember fam in _family)
+        {
+            fam.TakeDamage(-1);
+        }
+    }
+
     public void GameOver()
     {
         // Lose the game.
-        SceneManager.LoadScene(sceneName: "GameOver");
+        SceneManager.LoadScene("GameOver");
     }
 
     // Update is called once per frame
@@ -148,6 +191,6 @@ public class GameManager : MonoBehaviour
         // check if we should be gestating a baby
         Gestate();
 
+        CheckGoals();
     }
-
 }
