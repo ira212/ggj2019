@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        _playerRB.AddForce(movement * Global.Instance.SquareSpeed);
+        _playerRB.velocity = movement * Global.Instance.SquareSpeed;              //AddForce(movement * Global.Instance.SquareSpeed);
     }
 
     public void Spawn(Vector3 spawnPosition)
