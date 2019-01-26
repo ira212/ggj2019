@@ -33,13 +33,18 @@ public class Bullet : MonoBehaviour
     {
         if (collision.collider.GetComponent<Shield>() != null)
         {
-
+            collision.collider.GetComponent<Shield>().TakeDamage(_damage);
+            if (collision.collider.GetComponent<Shield>().IsShieldActive())
+            {
+                Destroy(gameObject);
+                return;
+            }
         }
-        else if (collision.collider.GetComponent<FamilyMember>() != null)
+
+        if (collision.collider.GetComponent<FamilyMember>() != null)
         {
             collision.collider.GetComponent<FamilyMember>().TakeDamage(_damage);
-        }
-
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }        
     }
 }

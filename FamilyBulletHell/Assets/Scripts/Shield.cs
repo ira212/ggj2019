@@ -44,4 +44,9 @@ public class Shield : MonoBehaviour
             }
         }
     }
+
+    public bool IsShieldActive()
+    {
+        return _shieldActive;
+    }
 }
