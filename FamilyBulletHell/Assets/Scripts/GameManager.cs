@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        // reset gestation timer
+        // reset gestation timer if both parents aren't home
         else
         {
             _gestating = false;
@@ -74,27 +74,6 @@ public class GameManager : MonoBehaviour
     void SpawnChild()
     {
 
-
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-        // Spawn bullet
-        if (_bulletSpawnTimer > 0)
-        {
-            _bulletSpawnTimer -= Time.deltaTime;
-        }
-        if(_bulletSpawnTimer <= 0)
-        {
-            SpawnBullet();
-
-            _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
-        }
-
-
-		// check if we should be gestating a baby
-		Gestate();
 
     }
 
@@ -115,7 +94,6 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-
         Vector3 playerSpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
 
         GameObject newPlayer = Instantiate(_player);
@@ -129,4 +107,26 @@ public class GameManager : MonoBehaviour
     {
         // Lose the game.
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Spawn bullet
+        if (_bulletSpawnTimer > 0)
+        {
+            _bulletSpawnTimer -= Time.deltaTime;
+        }
+        if (_bulletSpawnTimer <= 0)
+        {
+            SpawnBullet();
+
+            _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
+        }
+
+
+        // check if we should be gestating a baby
+        Gestate();
+
+    }
+
 }
