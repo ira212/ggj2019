@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
         _coparent = new GameObject();
 
         _homeArea = homeAreaObject.GetComponent<HomeArea>();
-        
+
+        _player.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
     }
 
 	void Gestate() {
@@ -87,5 +88,10 @@ public class GameManager : MonoBehaviour
 
         GameObject newBullet = Instantiate(_bulletObject);
         newBullet.GetComponent<Bullet>().Spawn(spawnPos, destination, bulletSpeed);
+    }
+
+    public void GameOver()
+    {
+        // Lose the game.
     }
 }
