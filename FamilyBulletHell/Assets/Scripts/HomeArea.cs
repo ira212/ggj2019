@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HomeArea : MonoBehaviour
 {
+
+    public System.Action OnHomeAreaEntry;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -13,15 +16,23 @@ public class HomeArea : MonoBehaviour
     // Checks if a given game object is within this game object
     public bool Contains (GameObject myObject)
     {
+        Collider myObjectCollider = myObject.GetComponent<Collider>();
+        Collider HomeAreaCollider = gameObject.GetComponent<Collider>();
         // check if myObject is within myself
-
-        //placeholder
-        return false;
+        if (myObjectCollider.bounds.Intersects(HomeAreaCollider.bounds))
+            return true;
+        else
+        {
+            return false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter(Collider other)
     {
-        
+        if (other.GetComponent<Player>() != null)
+        {
+            OnHomeAreaEntry?.Invoke();
+        }
+       
     }
 }
