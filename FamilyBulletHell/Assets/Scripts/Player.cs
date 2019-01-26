@@ -24,8 +24,10 @@ public class Player : MonoBehaviour
         _playerRB.AddForce(movement * Global.Instance.SquareSpeed);
     }
 
-    void SpawnPlayer(Vector3 spawnPosition)
+    public void Spawn(Vector3 spawnPosition)
     {
         GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.SquareSpeed, true);
+        gameObject.transform.position = spawnPosition;
+
     }
 }

@@ -30,9 +30,8 @@ public class GameManager : MonoBehaviour
 
         _homeArea = homeAreaObject.GetComponent<HomeArea>();
         _family = new List<FamilyMember>();
-
-        _player.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
-        _family.Add(_player.GetComponent<FamilyMember>());
+        SpawnPlayer();
+       
 
         // Spawn a random number of bullets at the start of the game. +1 on the second argument for Random.Range because if you give it ints, the 2nd argument is exclusive.
         for (int i = Random.Range(Global.Instance.BulletStartSpawnMin, Global.Instance.BulletStartSpawnMax +1); i > 0; i--)
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
 
 	void Gestate() {
 	    // confirm that both parents are in the home area
-        if (_homeArea.Contains(_player) && _homeArea.Contains(_coparent))
+        if (_homeArea.Contains(_family[0].gameObject) && _homeArea.Contains(_coparent))
         {
             // start to gestate by increasing gestation timer
             if (!_gestating)
@@ -112,6 +111,18 @@ public class GameManager : MonoBehaviour
         GameObject newBullet = Instantiate(bulletObject);
         newBullet.transform.localScale = new Vector3(Global.Instance.BulletScale, Global.Instance.BulletScale, 1);
         newBullet.GetComponent<Bullet>().Spawn(spawnPos, destination, bulletSpeed);
+    }
+
+    private void SpawnPlayer()
+    {
+
+        Vector3 playerSpawnPos = new Vector3(0.0f, 0.0f, 0.0f);
+
+        GameObject newPlayer = Instantiate(_player);
+        newPlayer.transform.localScale = new Vector3(Global.Instance.SquareScale, Global.Instance.SquareScale, 1);
+        newPlayer.GetComponent<Player>().Spawn(playerSpawnPos);
+        newPlayer.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
+        _family.Add(newPlayer.GetComponent<FamilyMember>());
     }
 
     public void GameOver()
