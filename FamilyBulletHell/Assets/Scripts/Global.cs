@@ -21,11 +21,7 @@ public class Global : MonoBehaviour
     }
 
 
-    public int GameLength = 10; //Length of games
-    public int RedFontTimeThreshold = 5; //Time where FOnt of Timer Turns Red
-    public int GridWidth = 8; //number of cubes wide
-    public int GridHeight = 5; //number of cubes tall
-    public string StartButtonText = "Start"; //Text on Start Button
-    public string TuningButtonText = "Tuning Variables"; //Text on Tuning Variables Button
-    public float Time; //Time left in game, resets every game
+    public float childSpawnTimeMin = 2.0f;
+    public float childSpawnTimeMax = 15.0f;
+ 
 }

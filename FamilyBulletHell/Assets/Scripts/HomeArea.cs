@@ -10,6 +10,15 @@ public class HomeArea : MonoBehaviour
         
     }
 
+    // Checks if a given game object is within this game object
+    public bool Contains (GameObject myObject)
+    {
+        // check if myObject is within myself
+
+        //placeholder
+        return false;
+    }
+
     // Update is called once per frame
     void Update()
     {
