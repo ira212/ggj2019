@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject healthMeter;
     public GameObject scoreCounter;
 
+    public GameObject[] familyMemberPrefabs;
+
     // Created somehow. These probably aren't going to be game object classes in the end
     [SerializeField]
     private GameObject _player;
@@ -41,9 +43,6 @@ public class GameManager : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
     {
-        // placeholder initialization
-        _coparent = new GameObject();
-
         _homeArea = homeAreaObject.GetComponent<HomeArea>();
         _family = new List<FamilyMember>();
         SpawnPlayer();
@@ -58,29 +57,10 @@ public class GameManager : MonoBehaviour
             SpawnBullet();
         }
 
-        _possiblePositions = new List<Vector3>();
-        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
-        _possiblePositions.Add(new Vector3(-20, -10, 3));
-        _possiblePositions.Add(new Vector3(0f, 11.3f, 3));
-        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
-        _possiblePositions.Add(new Vector3(-20, 0, 3));
-        _possiblePositions.Add(new Vector3(0, -10, 3));
-        _possiblePositions.Add(new Vector3(13.4f, 0, 3));
+        SpawnSpouse();
 
-        _goals = new List<GoalArea>();
-
-        for (int i = 0; i < 2; ++i)
-        {
-            GameObject area = Instantiate(goalAreaObject);
-            float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
-            area.transform.localScale = new Vector3(radius, 0.5f, radius);
-            float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
-            int posIndex = Random.Range(0, _possiblePositions.Count);
-            area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
-            area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
-            area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
-            _goals.Add(area.GetComponent<GoalArea>());
-        }
+        CreateGoalZonePositions();
+        CreateGoalZones();
     }
 
 	void Gestate() {
@@ -116,7 +96,7 @@ public class GameManager : MonoBehaviour
     // This should cause a new child to be spawned
     void SpawnChild()
     {
-
+        Debug.Log("Spawn child");
 
     }
 
@@ -161,6 +141,47 @@ public class GameManager : MonoBehaviour
         newPlayer.GetComponent<Player>().Spawn(playerSpawnPos);
         newPlayer.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
         _family.Add(newPlayer.GetComponent<FamilyMember>());
+    }
+
+    private void SpawnSpouse()
+    {
+        _coparent = Instantiate(familyMemberPrefabs[1]);
+        Vector3 spawnPos = new Vector3(-22f, 14, 0);
+        _coparent.transform.position = spawnPos;
+        _coparent.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, true);
+        _coparent.AddComponent<FamilyBehavior>();
+        _coparent.GetComponent<FamilyBehavior>().InitBehavior(Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed);
+        _family.Add(_coparent.GetComponent<FamilyMember>());
+    }
+
+    private void CreateGoalZones()
+    {
+        _goals = new List<GoalArea>();
+
+        for (int i = 0; i < 2; ++i)
+        {
+            GameObject area = Instantiate(goalAreaObject);
+            float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
+            area.transform.localScale = new Vector3(radius, 0.5f, radius);
+            float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
+            int posIndex = Random.Range(0, _possiblePositions.Count);
+            area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
+            area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
+            area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
+            _goals.Add(area.GetComponent<GoalArea>());
+        }
+    }
+
+    private void CreateGoalZonePositions()
+    {
+        _possiblePositions = new List<Vector3>();
+        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(-20, -10, 3));
+        _possiblePositions.Add(new Vector3(0f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(-20, 0, 3));
+        _possiblePositions.Add(new Vector3(0, -10, 3));
+        _possiblePositions.Add(new Vector3(13.4f, 0, 3));
     }
 
     // Method to check goals
