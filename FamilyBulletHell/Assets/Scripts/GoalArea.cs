@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoalArea : MonoBehaviour
 {
     public System.Action OnHealingTriggered;
+    public System.Action<GoalArea> OnRespawnReady;
 
     // How long the goal area remains active
     private float _duration;
@@ -15,6 +16,9 @@ public class GoalArea : MonoBehaviour
 
     private bool _isActive;
     private bool _healingActive;
+
+    private float _areaRespawnTimer;
+    private float _respawnTimeRemaining;
 
     private Collider _areaCollider;
 
@@ -31,6 +35,8 @@ public class GoalArea : MonoBehaviour
         _timeBeforeHeal = _healDelay;
         _isActive = true;
 
+        _areaRespawnTimer = Global.Instance.GoalAreaRespawnTimer;
+
         gameObject.SetActive(true);
     }
 
@@ -38,24 +44,29 @@ public class GoalArea : MonoBehaviour
     {
         _isActive = false;
         gameObject.SetActive(false);
+        _respawnTimeRemaining = _areaRespawnTimer;
     }
 
     private void Update()
     {
-        _duration -= Time.deltaTime;
-        if (_duration <= 0)
+        if (_isActive)
         {
-            // deactivate goal area
-        }
-
-        if (_healingActive)
-        {
-            _timeBeforeHeal -= Time.deltaTime;
-            if (_timeBeforeHeal <= 0)
+            _duration -= Time.deltaTime;
+            if (_duration <= 0)
             {
-                // heal family members and reset timer
-                OnHealingTriggered?.Invoke();
-                _timeBeforeHeal = _healDelay;
+                // deactivate goal area
+                DeactivateGoalArea();
+            }
+
+            if (_healingActive)
+            {
+                _timeBeforeHeal -= Time.deltaTime;
+                if (_timeBeforeHeal <= 0)
+                {
+                    // heal family members and reset timer
+                    OnHealingTriggered?.Invoke();
+                    _timeBeforeHeal = _healDelay;
+                }
             }
         }
     }
@@ -90,5 +101,15 @@ public class GoalArea : MonoBehaviour
     public bool IsAreaActive()
     {
         return _isActive;
+    }
+
+    public void UpdateRespawnTimer(float delta)
+    {
+        _respawnTimeRemaining -= delta;
+        if (_respawnTimeRemaining <= 0)
+        {
+            // tell GameManager to activate this again?
+            OnRespawnReady?.Invoke(this);
+        }
     }
 }

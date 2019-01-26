@@ -30,6 +30,8 @@ public class Global : MonoBehaviour
     public float GoalAreaRadMin = 4.0f;
     public float GoalAreaRadMax = 8.0f;
 
+    public float GoalAreaRespawnTimer = 3.0f;
+
     public float HomeAreaRadMin = 5.0f;
     public float HomeAreaRadMax = 9.0f;
 

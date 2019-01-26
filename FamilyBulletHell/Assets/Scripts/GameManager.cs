@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private HomeArea _homeArea;
     private List<FamilyMember> _family;
     private List<GoalArea> _goals;
+    private List<Vector3> _possiblePositions;
 
 	// Start is called before the first frame update
     void Start()
@@ -44,12 +45,25 @@ public class GameManager : MonoBehaviour
             SpawnBullet();
         }
 
+        _possiblePositions = new List<Vector3>();
+        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(-20, -10, 3));
+        _possiblePositions.Add(new Vector3(0f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(13.4f, 11.3f, 3));
+        _possiblePositions.Add(new Vector3(-20, 0, 3));
+        _possiblePositions.Add(new Vector3(0, -10, 3));
+        _possiblePositions.Add(new Vector3(13.4f, 0, 3));
+
         _goals = new List<GoalArea>();
 
         GameObject area = Instantiate(goalAreaObject);
-        area.transform.localScale = new Vector3(5, 0.5f, 5);
-        area.GetComponent<GoalArea>().ActivateGoalArea(new Vector3(13.4f, 11.3f, 0), 100000, 3);
+        float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
+        area.transform.localScale = new Vector3(radius, 0.5f, radius);
+        float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
+        int posIndex = Random.Range(0, _possiblePositions.Count);
+        area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
         area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
+        area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
         _goals.Add(area.GetComponent<GoalArea>());
     }
 
@@ -155,6 +169,10 @@ public class GameManager : MonoBehaviour
                     }
                 }
             }
+            else
+            {
+                goal.UpdateRespawnTimer(Time.deltaTime);
+            }
         }
     }
 
@@ -164,6 +182,15 @@ public class GameManager : MonoBehaviour
         {
             fam.TakeDamage(-1);
         }
+    }
+
+    private void ActivateGoalArea(GoalArea area)
+    {
+        int positionIndex = Random.Range(0, _possiblePositions.Count);
+        float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
+        float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
+        area.transform.localScale = new Vector3(radius, 0.5f, radius);
+        area.ActivateGoalArea(_possiblePositions[positionIndex], duration, Global.Instance.GoalAreaHeal);
     }
 
     public void GameOver()
