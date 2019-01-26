@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -13,7 +14,6 @@ public class Player : MonoBehaviour
         _playerRB = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 
         Vector3 movement = new Vector3(moveHorizontal, moveVertical, 0.0f);
 
-        _playerRB.velocity = movement * Global.Instance.SquareSpeed;              //AddForce(movement * Global.Instance.SquareSpeed);
+        _playerRB.velocity = movement * Global.Instance.SquareSpeed;
     }
 
     public void Spawn(Vector3 spawnPosition)
