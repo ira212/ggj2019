@@ -23,22 +23,22 @@ public class Bullet : MonoBehaviour
         transform.position = newPos;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.GetComponent<Shield>() != null)
+        if (collision.GetComponent<Shield>() != null)
         {
-            collision.collider.GetComponent<Shield>().TakeDamage(_damage);
-            if (collision.collider.GetComponent<Shield>().IsShieldActive())
+            collision.GetComponent<Shield>().TakeDamage(_damage);
+            if (collision.GetComponent<Shield>().IsShieldActive())
             {
                 Destroy(gameObject);
                 return;
             }
         }
 
-        if (collision.collider.GetComponent<FamilyMember>() != null)
+        if (collision.GetComponent<FamilyMember>() != null)
         {
             Debug.Log("Collision!");
-            collision.collider.GetComponent<FamilyMember>().TakeDamage(_damage);
+            collision.GetComponent<FamilyMember>().TakeDamage(_damage);
             Destroy(gameObject);
         }        
     }
