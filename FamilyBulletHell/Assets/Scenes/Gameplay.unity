@@ -153,21 +153,22 @@ MonoBehaviour:
   GoalAreaHeal: 5
   ShieldRespawnTime: 8
   ShieldHPmax: 20
+  BulletDamageSpeedFactor: 0.5
   SquareScale: 4
   TriangleScale: 4
   BulletScale: 1.5
   ChildScale: 2
   BulletSpeedMin: 0.5
   BulletSpeedMax: 3
-  SquareSpeed: 10.5
+  SquareSpeed: 9.7
   TriangleSpeed: 1
   ChildSpeed: 1.2
   TriangleAttSpan: 6
   ChildAttenSpanMIn: 2
   ChildAttenSpanMax: 4
   BulletStartSpawnMin: 2
-  BulletStartSpawnMax: 5
-  NewBulletSpawnMin: 0.5
+  BulletStartSpawnMax: 3
+  NewBulletSpawnMin: 0.7
   NewBulletSpawnMax: 2
   SpawnFreqTimeFact: 0.95
   TriangleArriveTimeMin: 5
