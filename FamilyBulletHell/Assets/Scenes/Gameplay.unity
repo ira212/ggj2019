@@ -658,7 +658,9 @@ MonoBehaviour:
     type: 3}
   healthMeter: {fileID: 1884678516}
   scoreCounter: {fileID: 1936643672}
-  familyMemberPrefabs: []
+  familyMemberPrefabs:
+  - {fileID: 6101539767800459540, guid: afb72a79dbf7bbe41bafa1316d32ceb8, type: 3}
+  - {fileID: 7848865297519973890, guid: 52be6c89ec3690b4d91f446e16fb5879, type: 3}
   _player: {fileID: 8005480149281782990, guid: 2b17fc03a7cb2214ea3436a1712308a8, type: 3}
 --- !u!4 &2045332284
 Transform:
