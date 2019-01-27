@@ -14,6 +14,11 @@ public class FamilyMember : MonoBehaviour
     public Text HealthText;
     private Canvas HealthCanvas;
 
+    public void Update()
+    {
+        HealthText.text = _currentHealth.ToString();
+    }
+
     public void SpawnFamilyMember(int maxHP, float moveSpeed, bool isParent)
     {
         _maxHealth = maxHP;

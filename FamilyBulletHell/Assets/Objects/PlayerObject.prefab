@@ -93,8 +93,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632780574039391244}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.40625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 3266077047793997392}
   m_Father: {fileID: 8005480149281782980}
@@ -102,8 +102,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 507.51422, y: 384.17343}
-  m_SizeDelta: {x: 1024, y: 768}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5755088752459570577
 Canvas:
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
+  m_DynamicPixelsPerUnit: 100
 --- !u!114 &1545612574353950488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,10 +197,10 @@ RectTransform:
   m_Father: {fileID: 119936376011229937}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000005722, y: -0.000011444}
-  m_SizeDelta: {x: 137.3, y: 90.5}
+  m_AnchorMin: {x: 0.4242349, y: 0.4353165}
+  m_AnchorMax: {x: 0.5, y: 0.4353165}
+  m_AnchoredPosition: {x: 0.2, y: 1.2}
+  m_SizeDelta: {x: 16.524515, y: 14.137282}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &619398238823497527
 CanvasRenderer:
@@ -232,11 +232,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
-    m_MaxSize: 40
+    m_MinSize: 0
+    m_MaxSize: 190
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -274,7 +274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8005480149281782990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.485793, y: -0.17342886, z: -0.40625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 119936376011229937}
