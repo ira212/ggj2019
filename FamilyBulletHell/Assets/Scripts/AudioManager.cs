@@ -188,7 +188,7 @@ public class AudioManager : MonoBehaviour
         IsSFXEnabled = toggle;
     }
 
-    public void TransitionTracks(string track1, string track2, float fadeDuration = 0.7f)
+    public void TransitionTracks(string track1, string track2, float fadeDuration = 1.5f)
     {
         int iterations = (int)(fadeDuration / 0.1);
         float speed = (float)1 / iterations;
