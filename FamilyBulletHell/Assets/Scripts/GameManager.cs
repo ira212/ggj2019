@@ -66,7 +66,8 @@ public class GameManager : MonoBehaviour
         CreateGoalZones();
 
         StartCoroutine(ScoreCoroutine());
-        
+
+        AudioManager.Instance.PlayMusic("Drums");
         AudioManager.Instance.PlayMusic("Bass-And-Chords");
         AudioManager.Instance.PlayMusic("Partner1-Happy");
     }
