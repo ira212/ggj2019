@@ -57,6 +57,7 @@ public class Bullet : MonoBehaviour
         if (collision.GetComponent<FamilyMember>() != null)
         {
             Debug.Log("Collision!");
+            AudioManager.Instance.PlaySFX("Bullet-Hit");
             collision.GetComponent<FamilyMember>().TakeDamage(_damage);
             Destroy(gameObject);
         }        

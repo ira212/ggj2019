@@ -85,5 +85,14 @@ public class FamilyBehavior : MonoBehaviour
     {
         _followingPlayer = true;
         _remainingAttention = _attentionSpan;
+
+        if (GetComponent<FamilyMember>().IsParent())
+        {
+            AudioManager.Instance.PlaySFX("Coparent-Directed");
+        }
+        else
+        {
+            AudioManager.Instance.PlaySFX("Child-Directed");
+        }
     }
 }
