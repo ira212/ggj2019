@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
         newChild.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
         newChild.AddComponent<FamilyBehavior>();
         newChild.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -22, 22, -16, 18);
+        newChild.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
         newChild.transform.position = playerSpawnPos;
         _family.Add(newPlayer.GetComponent<FamilyMember>());
 
@@ -185,6 +186,7 @@ public class GameManager : MonoBehaviour
         _coparent.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, true);
         _coparent.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
         _coparent.AddComponent<FamilyBehavior>();
+        _coparent.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
         _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -22, 22, -16, 18);
         _family.Add(_coparent.GetComponent<FamilyMember>());
 
