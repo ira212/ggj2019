@@ -473,6 +473,11 @@ PrefabInstance:
       propertyPath: childSpawnTimeMax
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 6859385857670639185, guid: 896d8ae87b91b5c40b744b4c89cc48f4,
+        type: 3}
+      propertyPath: ChildScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 896d8ae87b91b5c40b744b4c89cc48f4, type: 3}
 --- !u!1 &1069369429
