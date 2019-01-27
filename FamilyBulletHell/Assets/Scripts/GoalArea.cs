@@ -115,4 +115,28 @@ public class GoalArea : MonoBehaviour
             OnRespawnReady?.Invoke(this);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Player player = other.GetComponent<Player>();
+        if (player != null)
+        {
+            AudioManager.Instance.PlaySFX("Partner1-Enters-GoalZone");
+        }
+        else
+        {
+            FamilyMember fam = other.GetComponent<FamilyMember>();
+            if (fam != null)
+            {
+                if (fam.IsParent())
+                {
+                    AudioManager.Instance.PlaySFX("Partner2-Enters-GoalZone");
+                }
+                else
+                {
+                    AudioManager.Instance.PlaySFX("Partner2-Enters-GoalZone");
+                }
+            }
+        }
+    }
 }
