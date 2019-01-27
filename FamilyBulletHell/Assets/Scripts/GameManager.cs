@@ -150,7 +150,7 @@ public class GameManager : MonoBehaviour
         _coparent.transform.position = spawnPos;
         _coparent.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, true);
         _coparent.AddComponent<FamilyBehavior>();
-        _coparent.GetComponent<FamilyBehavior>().InitBehavior(Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed);
+        _coparent.GetComponent<FamilyBehavior>().InitBehavior(Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -25, 25, -20, 20);
         _family.Add(_coparent.GetComponent<FamilyMember>());
     }
 

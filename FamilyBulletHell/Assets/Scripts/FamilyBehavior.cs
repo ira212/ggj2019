@@ -14,11 +14,20 @@ public class FamilyBehavior : MonoBehaviour
     private bool _isWaiting;
 
     private Vector3 _direction;
+    private Vector3 _destination;
 
-    public void InitBehavior(float attention, float speed)
+    private float _minX, _minY, _maxX, _maxY;
+
+    public void InitBehavior(float attention, float speed, float lowX, float highX, float lowY, float highY)
     {
         _attentionSpan = attention;
         _speed = speed;
+
+        // set bounding box variables
+        _minX = lowX;
+        _minY = lowY;
+        _maxX = highX;
+        _maxY = highY;
     }
 
     // Update is called once per frame
@@ -29,7 +38,7 @@ public class FamilyBehavior : MonoBehaviour
             _walkTime -= Time.deltaTime;
             transform.position += _direction * _speed * Time.deltaTime;
 
-            if (_walkTime <= 0)
+            if (_walkTime <= 0 || Vector3.Magnitude(transform.position - _destination) <= 0.5f)
             {
                 _isWalking = false;
                 _isWaiting = true;
@@ -46,9 +55,10 @@ public class FamilyBehavior : MonoBehaviour
                 _isWaiting = false;
                 _isWalking = true;
 
-                float xDir = Random.Range(-1, 1);
-                float yDir = Random.Range(-1, 1);
-                _direction = new Vector3(xDir, yDir, 0).normalized;
+                float xDir = Random.Range(_minX, _maxX);
+                float yDir = Random.Range(_minX, _maxY);
+                _destination = new Vector3(xDir, yDir, 0);
+                _direction = Vector3.Normalize(_destination - transform.position);
                 _walkTime = Random.Range(1.0f, 3.0f);
             }
         }
