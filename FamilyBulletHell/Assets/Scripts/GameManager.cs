@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     private float _gestationTimer;
     private bool _gestating;
+    private bool _inGoalArea;
 
     private float _bulletSpawnTimer;
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
         _scoreText = scoreCounter.GetComponent<Text>();
         _score = 0.0f;
         _intScore = 0;
+        _inGoalArea = false;
 
         // Spawn a random number of bullets at the start of the game. +1 on the second argument for Random.Range because if you give it ints, the 2nd argument is exclusive.
         for (int i = Random.Range(Global.Instance.BulletStartSpawnMin, Global.Instance.BulletStartSpawnMax +1); i > 0; i--)
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour
 
         CreateGoalZonePositions();
         CreateGoalZones();
+
+        StartCoroutine(ScoreCoroutine());
     }
 
 	void Gestate() {
@@ -119,7 +123,7 @@ public class GameManager : MonoBehaviour
         newChild.transform.position = playerSpawnPos;
         _family.Add(newPlayer.GetComponent<FamilyMember>());
 
-        _score += 100;
+        Global.Instance.FinalScore += 100;
     }
 
     // Method used to spawn a bullet
@@ -183,11 +187,23 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < 2; ++i)
         {
+            int posIndex = Random.Range(0, _possiblePositions.Count);
+            bool badPos = false;
+            while (badPos)
+            {
+                badPos = false;
+                foreach (GoalArea goal in _goals)
+                {
+                    if (_possiblePositions[posIndex].Equals(goal.transform.position))
+                    {
+                        badPos = true;
+                    }
+                }
+            }
             GameObject area = Instantiate(goalAreaObject);
             float radius = Random.Range(Global.Instance.GoalAreaRadMin, Global.Instance.GoalAreaRadMax);
             area.transform.localScale = new Vector3(radius, 0.5f, radius);
             float duration = Random.Range(Global.Instance.GoalAreaHeal + 2.0f, Global.Instance.GoalAreaHeal + 3.0f);
-            int posIndex = Random.Range(0, _possiblePositions.Count);
             area.GetComponent<GoalArea>().ActivateGoalArea(_possiblePositions[posIndex], duration, Global.Instance.GoalAreaHeal);
             area.GetComponent<GoalArea>().OnHealingTriggered += GoalAreaHeal;
             area.GetComponent<GoalArea>().OnRespawnReady += ActivateGoalArea;
@@ -210,6 +226,8 @@ public class GameManager : MonoBehaviour
     // Method to check goals
     private void CheckGoals()
     {
+        int goalsOccupied = 0;
+
         foreach (GoalArea goal in _goals)
         {
             if (goal.IsAreaActive())
@@ -220,6 +238,8 @@ public class GameManager : MonoBehaviour
                     {
                         goal.ActivateHealing();
                     }
+
+                    ++goalsOccupied;
                 }
                 else
                 {
@@ -233,6 +253,15 @@ public class GameManager : MonoBehaviour
             {
                 goal.UpdateRespawnTimer(Time.deltaTime);
             }
+        }
+
+        if (goalsOccupied > 0)
+        {
+            _inGoalArea = true;
+        }
+        else
+        {
+            _inGoalArea = false;
         }
     }
 
@@ -270,6 +299,22 @@ public class GameManager : MonoBehaviour
     {
         // Lose the game.
         SceneManager.LoadScene("GameOver");
+        StopCoroutine(ScoreCoroutine());
+    }
+
+    private IEnumerator ScoreCoroutine()
+    {
+        while (true)
+        {
+            Global.Instance.FinalScore++;
+            if (_inGoalArea)
+            {
+                Global.Instance.FinalScore += Global.Instance.GoalScorePerSecond;
+            }
+            _scoreText.text = "Score: " + Global.Instance.FinalScore.ToString();
+
+            yield return new WaitForSeconds(1.0f);
+        }
     }
 
     // Update is called once per frame
@@ -301,9 +346,8 @@ public class GameManager : MonoBehaviour
             _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
         }
 
-        _score = _score + Time.deltaTime;
-        Global.Instance.FinalScore = (int)_score;
-        _scoreText.text ="Score: " + Global.Instance.FinalScore.ToString();
+        //_score = Global.Instance.FinalScore + Time.deltaTime;
+        //Global.Instance.FinalScore = (int)_score;
 
         _healthText.text = "Health: " + newPlayer.GetComponent<FamilyMember>().GetHealth().ToString();
         _coparentHealthText.text = "Partner Health: " + _coparent.GetComponent<FamilyMember>().GetHealth().ToString();

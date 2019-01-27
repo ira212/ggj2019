@@ -54,11 +54,6 @@ public class GoalArea : MonoBehaviour
     {
         if (_isActive)
         {
-            _pointsTimer += Time.deltaTime;
-            if(_pointsTimer >= 1.0f)
-            {
-                Global.Instance.FinalScore = Global.Instance.FinalScore + Global.Instance.GoalScorePerSecond;
-            }
             _duration -= Time.deltaTime;
             if (_duration <= 0)
             {
