@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public GameObject goalAreaObject;
     public GameObject healthMeter;
     public GameObject scoreCounter;
-
+    public Text _coparentHealthText;
     public GameObject[] familyMemberPrefabs;
 
     // Created somehow. These probably aren't going to be game object classes in the end
@@ -271,6 +271,7 @@ public class GameManager : MonoBehaviour
         _scoreText.text ="Score: " + _intScore.ToString();
 
         _healthText.text = "Health: " + newPlayer.GetComponent<FamilyMember>().GetHealth().ToString();
+        _coparentHealthText.text = "Partner Health: " + _coparent.GetComponent<FamilyMember>().GetHealth().ToString();
         // check if we should be gestating a baby
         Gestate();
 
