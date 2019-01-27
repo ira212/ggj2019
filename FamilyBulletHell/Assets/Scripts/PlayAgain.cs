@@ -8,10 +8,12 @@ public class PlayAgain : MonoBehaviour
 {
 
     public Text scoreTotal;
+    public Text childTotal;
 
     void Start()
     {
         scoreTotal.text = "Final Score: " + Global.Instance.FinalScore.ToString();
+        childTotal.text = "# of Children: " + Global.Instance.ChildrenNumber.ToString();
     }
 
     public void SceneChange()

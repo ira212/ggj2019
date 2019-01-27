@@ -290,6 +290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreTotal: {fileID: 462185612}
+  childTotal: {fileID: 994825516}
 --- !u!4 &563961613
 Transform:
   m_ObjectHideFlags: 0
