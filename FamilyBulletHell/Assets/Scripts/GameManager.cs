@@ -108,12 +108,12 @@ public class GameManager : MonoBehaviour
         if (childTypeChance <= 0.5f)
         {
             newChild = Instantiate(familyMemberPrefabs[0]);
-            newChild.transform.localScale = new Vector3(Global.Instance.SquareScale / 2, Global.Instance.SquareScale / 2, 1);
+            newChild.transform.localScale = new Vector3((Global.Instance.SquareScale / 2) * 2, (Global.Instance.SquareScale / 2) * 2, 1);
         }
         else
         {
             newChild = Instantiate(familyMemberPrefabs[1]);
-            newChild.transform.localScale = new Vector3(Global.Instance.TriangleScale / 2, Global.Instance.TriangleScale / 2, 1);
+            newChild.transform.localScale = new Vector3((Global.Instance.TriangleScale / 2) * 2, (Global.Instance.TriangleScale / 2) * 2, 1);
         }
         
         newChild.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, false);
