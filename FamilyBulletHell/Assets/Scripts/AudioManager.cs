@@ -198,7 +198,6 @@ public class AudioManager : MonoBehaviour
     private IEnumerator TransitionTrackCoroutine(AudioSource source1, AudioSource source2, int iterations, float speed, float maxVolume)
     {
         source2.volume = 0;
-        source2.Play();
 
         while (source1.volume >= speed && source2.volume < maxVolume)
         {
@@ -211,10 +210,20 @@ public class AudioManager : MonoBehaviour
         {
             source2.volume = maxVolume;
         }
-        source1.Stop();
+        if (source1.volume > 0)
+        {
+            source1.volume = 0;
+        }
     }
 
-    private IEnumerator FadeIn(AudioSource source, int iterations, float speed, float duration, float maxVolume)
+    public void FadeIn(string audioID, float fadeDuration = 0.5f)
+    {
+        int iterations = (int)(fadeDuration / 0.1);
+        float speed = (float)1 / iterations;
+        StartCoroutine(FadeInCoroutine(_audioSources[audioID.ToLower()], iterations, speed, 1));
+    }
+
+    private IEnumerator FadeInCoroutine(AudioSource source, int iterations, float speed, float maxVolume)
     {
         _keepFadingIn = true;
         source.volume = 0;
@@ -231,7 +240,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    private IEnumerator FadeOut(AudioSource source, int iterations, float speed, float duration)
+    public void FadeOut(string audioID, float fadeDuration = 0.5f)
+    {
+        int iterations = (int)(fadeDuration / 0.1);
+        float speed = (float)1 / iterations;
+        StartCoroutine(FadeOutCoroutine(_audioSources[audioID.ToLower()], iterations, speed));
+    }
+
+    private IEnumerator FadeOutCoroutine(AudioSource source, int iterations, float speed)
     {
         _keepFadingOut = true;
 

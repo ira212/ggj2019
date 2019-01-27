@@ -66,6 +66,11 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayMusic("Drums");
         AudioManager.Instance.PlayMusic("Bass-And-Chords");
         AudioManager.Instance.PlayMusic("Partner1-Happy");
+        AudioManager.Instance.PlayMusic("Partner1-Unhappy");
+        AudioManager.Instance.PlayMusic("Partner2-Happy");
+        AudioManager.Instance.PlayMusic("Partner2-Unhappy");
+        AudioManager.Instance.PlayMusic("Child-Happy");
+        AudioManager.Instance.PlayMusic("Child-Unhappy");
     }
 
 	void Gestate() {
@@ -129,7 +134,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlaySFX("Child-Appears");
         if (_family.Count <= 3)
         {
-            AudioManager.Instance.PlayMusic("Child-Happy");
+            AudioManager.Instance.FadeIn("Child-Happy");
         }
     }
 
@@ -188,8 +193,6 @@ public class GameManager : MonoBehaviour
         _coparent.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
         _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -22, 22, -16, 18);
         _family.Add(_coparent.GetComponent<FamilyMember>());
-
-        AudioManager.Instance.PlayMusic("Partner2-Happy");
     }
 
     private void CreateGoalZones()
