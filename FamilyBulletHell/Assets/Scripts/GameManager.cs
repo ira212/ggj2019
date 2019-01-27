@@ -118,6 +118,8 @@ public class GameManager : MonoBehaviour
         newChild.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -25, 25, -20, 20);
         newChild.transform.position = playerSpawnPos;
         _family.Add(newPlayer.GetComponent<FamilyMember>());
+
+        _score += 100;
     }
 
     // Method used to spawn a bullet
