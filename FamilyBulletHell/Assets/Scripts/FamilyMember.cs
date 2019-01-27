@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FamilyMember : MonoBehaviour
 {
@@ -17,6 +18,34 @@ public class FamilyMember : MonoBehaviour
         _currentHealth = maxHP;
         _speed = moveSpeed;
         _isParent = isParent;
+    }
+
+    public void HealthMonitor(Transform self)
+    {
+        GameObject HealthCanvas;
+        GameObject HealthText;
+
+        Canvas myCanvas;
+        Text myText;
+
+        HealthCanvas = new GameObject();
+        HealthText = new GameObject();
+
+        HealthCanvas.AddComponent<Canvas>();
+        HealthCanvas.name = "Health Canvas";
+        HealthText.AddComponent<Text>();
+        HealthText.name = "Health Text";
+
+        myCanvas = HealthCanvas.GetComponent<Canvas>();
+        myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        HealthCanvas.AddComponent<CanvasScaler>();
+        HealthCanvas.AddComponent<GraphicRaycaster>();
+
+        HealthText.transform.parent = HealthText.transform;
+        myText = HealthText.AddComponent<Text>();
+        myText.font = (Font)Resources.Load("MyFont");
+        myText.text = _currentHealth.ToString();
+        myText.fontSize = 100;
     }
 
     public void TakeDamage(int damageTaken)
