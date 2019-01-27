@@ -43,7 +43,7 @@ public class FamilyBehavior : MonoBehaviour
             transform.position += _direction * _speed * Time.deltaTime;
 
             _remainingAttention -= Time.deltaTime;
-            if (_remainingAttention <= 0 || Vector3.Magnitude(_playerPosition.position - transform.position) <= 2.0)
+            if (_remainingAttention <= 0)
             {
                 _followingPlayer = false;
             }
