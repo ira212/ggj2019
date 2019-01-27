@@ -114,11 +114,10 @@ public class GameManager : MonoBehaviour
         
         newChild.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, false);
         newChild.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
-        _family.Add(newPlayer.GetComponent<FamilyMember>());
-        _coparent.AddComponent<FamilyBehavior>();
-        _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -25, 25, -20, 20);
+        newChild.AddComponent<FamilyBehavior>();
+        newChild.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -25, 25, -20, 20);
         newChild.transform.position = playerSpawnPos;
-
+        _family.Add(newPlayer.GetComponent<FamilyMember>());
     }
 
     // Method used to spawn a bullet
