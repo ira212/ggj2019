@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
         CreateGoalZones();
 
         StartCoroutine(ScoreCoroutine());
+        
+        AudioManager.Instance.PlayMusic("Bass-And-Chords");
+        AudioManager.Instance.PlayMusic("Partner1-Happy");
     }
 
 	void Gestate() {
@@ -124,6 +127,8 @@ public class GameManager : MonoBehaviour
         _family.Add(newPlayer.GetComponent<FamilyMember>());
 
         Global.Instance.FinalScore += 100;
+
+        AudioManager.Instance.PlayMusic("Child-Happy");
     }
 
     // Method used to spawn a bullet
@@ -179,6 +184,8 @@ public class GameManager : MonoBehaviour
         _coparent.AddComponent<FamilyBehavior>();
         _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -22, 22, -18, 18);
         _family.Add(_coparent.GetComponent<FamilyMember>());
+
+        AudioManager.Instance.PlayMusic("Partner2-Happy");
     }
 
     private void CreateGoalZones()

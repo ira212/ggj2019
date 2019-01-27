@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager
 {
     #region Singleton
     private static AudioManager _instance;
@@ -52,17 +52,6 @@ public class AudioManager : MonoBehaviour
         private set
         {
             _isMusicEnabled = value;
-        }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        foreach (Transform child in transform)
-        {
-            AudioSource source = child.GetComponent<AudioSource>();
-            string name = child.name;
-            _audioSources.Add(name.ToLower(), source);
         }
     }
 
