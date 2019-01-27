@@ -246,6 +246,7 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // Lose the game.
+        Global.Instance.FinalScore = _intScore;
         SceneManager.LoadScene("GameOver");
     }
 

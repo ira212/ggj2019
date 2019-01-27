@@ -80,6 +80,6 @@ public class Global : MonoBehaviour
     public float SecndChildArriveTimeMin = 2.0f;
     public float SecndChildArriveTimeMax = 15.0f;
 
-
+    public int FinalScore;
 
 }
