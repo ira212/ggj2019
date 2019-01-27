@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour
 
         Global.Instance.FinalScore += 100;
 
+        AudioManager.Instance.PlaySFX("Child-Appears");
         AudioManager.Instance.PlayMusic("Child-Happy");
     }
 
