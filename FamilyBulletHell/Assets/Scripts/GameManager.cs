@@ -10,9 +10,7 @@ public class GameManager : MonoBehaviour
 	public GameObject homeAreaObject;
     public GameObject bulletObject;
     public GameObject goalAreaObject;
-    public GameObject healthMeter;
     public GameObject scoreCounter;
-    public Text _coparentHealthText;
     public GameObject[] familyMemberPrefabs;
 
     // Created somehow. These probably aren't going to be game object classes in the end
@@ -31,7 +29,6 @@ public class GameManager : MonoBehaviour
 
     private Vector3 spawnPos;
 
-    private Text _healthText;
     private Text _scoreText;
     private float _score;
     private int _intScore;
@@ -48,7 +45,6 @@ public class GameManager : MonoBehaviour
         _homeArea = homeAreaObject.GetComponent<HomeArea>();
         _family = new List<FamilyMember>();
         SpawnPlayer();
-        _healthText = healthMeter.GetComponent<Text>();
         _scoreText = scoreCounter.GetComponent<Text>();
         _score = 0.0f;
         _intScore = 0;
@@ -357,12 +353,6 @@ public class GameManager : MonoBehaviour
 
             _bulletSpawnTimer = Random.Range(Global.Instance.NewBulletSpawnMin, Global.Instance.NewBulletSpawnMax);
         }
-
-        //_score = Global.Instance.FinalScore + Time.deltaTime;
-        //Global.Instance.FinalScore = (int)_score;
-
-        _healthText.text = "Health: " + newPlayer.GetComponent<FamilyMember>().GetHealth().ToString();
-        _coparentHealthText.text = "Partner Health: " + _coparent.GetComponent<FamilyMember>().GetHealth().ToString();
         // check if we should be gestating a baby
         Gestate();
 
