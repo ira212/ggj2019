@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class AudioManager
+public class AudioManager : MonoBehaviour
 {
     #region Singleton
-    private static AudioManager _instance;
-    public static AudioManager Instance
+    public static AudioManager Instance;
+    void Awake()
     {
-        get
+        if (Instance == null)
         {
-            if (_instance == null)
-            {
-                _instance = new AudioManager();
-            }
-
-            return _instance;
+            DontDestroyOnLoad(gameObject); //makes instance persist across scenes
+            Instance = this;
+        }
+        else if (Instance != this)
+        {
+            Destroy(gameObject); //deletes copies of global which do not need to exist, so right version is used to get info from
         }
     }
     #endregion
@@ -28,6 +29,8 @@ public class AudioManager
     private bool _keepFadingOut;
 
     private WaitForSeconds _fadeDelay = new WaitForSeconds(0.1f);
+
+    private MonoBehaviour _coroutineStarter = new MonoBehaviour();
 
     private bool _isSFXEnabled = true;
     public bool IsSFXEnabled
@@ -185,33 +188,59 @@ public class AudioManager
         IsSFXEnabled = toggle;
     }
 
-    private IEnumerator FadeIn(string audioID, float speed, float maxVolume)
+    public void TransitionTracks(string track1, string track2, float fadeDuration = 0.7f)
+    {
+        int iterations = (int)(fadeDuration / 0.1);
+        float speed = (float)1 / iterations;
+        StartCoroutine(TransitionTrackCoroutine(_audioSources[track1.ToLower()], _audioSources[track2.ToLower()], iterations, speed, 1));
+    }
+
+    private IEnumerator TransitionTrackCoroutine(AudioSource source1, AudioSource source2, int iterations, float speed, float maxVolume)
+    {
+        source2.volume = 0;
+        source2.Play();
+
+        while (source1.volume >= speed && source2.volume < maxVolume)
+        {
+            source2.volume += speed;
+            source1.volume -= speed;
+            yield return _fadeDelay;
+        }
+        
+        if (source2.volume < maxVolume)
+        {
+            source2.volume = maxVolume;
+        }
+        source1.Stop();
+    }
+
+    private IEnumerator FadeIn(AudioSource source, int iterations, float speed, float duration, float maxVolume)
     {
         _keepFadingIn = true;
-        _keepFadingOut = false;
+        source.volume = 0;
 
-        string name = audioID.ToLower();
-        _audioSources[name].volume = 0;
-
-        while (_audioSources[name].volume < maxVolume && _keepFadingIn)
+        while (source.volume < maxVolume && _keepFadingIn)
         {
-            _audioSources[name].volume += speed;
+            source.volume += speed;
             yield return _fadeDelay;
+        }
+
+        if (source.volume < maxVolume)
+        {
+            source.volume = maxVolume;
         }
     }
 
-    private IEnumerator FadeOut(string audioID, float speed)
+    private IEnumerator FadeOut(AudioSource source, int iterations, float speed, float duration)
     {
-        _keepFadingIn = false;
         _keepFadingOut = true;
 
-        string name = audioID.ToLower();
-        while (_audioSources[name].volume >= speed && _keepFadingOut)
+        while (source.volume >= speed && _keepFadingOut)
         {
-            _audioSources[name].volume -= speed;
+            source.volume -= speed;
             yield return _fadeDelay;
         }
-
-        _audioSources[name].Stop();
+        
+        source.Stop();
     }
 }

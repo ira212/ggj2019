@@ -127,7 +127,10 @@ public class GameManager : MonoBehaviour
         Global.Instance.FinalScore += 100;
 
         AudioManager.Instance.PlaySFX("Child-Appears");
-        AudioManager.Instance.PlayMusic("Child-Happy");
+        if (_family.Count <= 3)
+        {
+            AudioManager.Instance.PlayMusic("Child-Happy");
+        }
     }
 
     // Method used to spawn a bullet
