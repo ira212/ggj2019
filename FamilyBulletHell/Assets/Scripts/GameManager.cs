@@ -66,11 +66,6 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.PlayMusic("Drums");
         AudioManager.Instance.PlayMusic("Bass-And-Chords");
         AudioManager.Instance.PlayMusic("Partner1-Happy");
-        AudioManager.Instance.PlayMusic("Partner1-Unhappy");
-        AudioManager.Instance.PlayMusic("Partner2-Happy");
-        AudioManager.Instance.PlayMusic("Partner2-Unhappy");
-        AudioManager.Instance.PlayMusic("Child-Happy");
-        AudioManager.Instance.PlayMusic("Child-Unhappy");
     }
 
 	void Gestate() {
@@ -113,12 +108,12 @@ public class GameManager : MonoBehaviour
         if (childTypeChance <= 0.5f)
         {
             newChild = Instantiate(familyMemberPrefabs[0]);
-            newChild.transform.localScale = new Vector3((Global.Instance.SquareScale / 2) * 2, (Global.Instance.SquareScale / 2) * 2, 1);
+            newChild.transform.localScale = new Vector3((Global.Instance.SquareScale / 2) * Global.Instance.ChildScale, (Global.Instance.SquareScale / 2) * Global.Instance.ChildScale, 1);
         }
         else
         {
             newChild = Instantiate(familyMemberPrefabs[1]);
-            newChild.transform.localScale = new Vector3((Global.Instance.TriangleScale / 2) * 2, (Global.Instance.TriangleScale / 2) * 2, 1);
+            newChild.transform.localScale = new Vector3((Global.Instance.TriangleScale / 2) * Global.Instance.ChildScale, (Global.Instance.TriangleScale / 2) * Global.Instance.ChildScale, 1);
         }
         
         newChild.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, false);
@@ -132,10 +127,7 @@ public class GameManager : MonoBehaviour
         Global.Instance.FinalScore += 100;
 
         AudioManager.Instance.PlaySFX("Child-Appears");
-        if (_family.Count <= 3)
-        {
-            AudioManager.Instance.FadeIn("Child-Happy");
-        }
+        AudioManager.Instance.PlayMusic("Child-Happy");
     }
 
     // Method used to spawn a bullet
@@ -193,6 +185,8 @@ public class GameManager : MonoBehaviour
         _coparent.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
         _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -22, 22, -16, 18);
         _family.Add(_coparent.GetComponent<FamilyMember>());
+
+        AudioManager.Instance.PlayMusic("Partner2-Happy");
     }
 
     private void CreateGoalZones()
