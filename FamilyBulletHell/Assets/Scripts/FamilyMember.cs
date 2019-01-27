@@ -11,6 +11,8 @@ public class FamilyMember : MonoBehaviour
     private int _currentHealth;
     private float _speed;
     private bool _isParent;
+    public Text HealthText;
+    private Canvas HealthCanvas;
 
     public void SpawnFamilyMember(int maxHP, float moveSpeed, bool isParent)
     {
@@ -20,32 +22,10 @@ public class FamilyMember : MonoBehaviour
         _isParent = isParent;
     }
 
-    public void HealthMonitor(Transform self)
+    public void HealthMonitor(Camera myCamera)
     {
-        GameObject HealthCanvas;
-        GameObject HealthText;
-
-        Canvas myCanvas;
-        Text myText;
-
-        HealthCanvas = new GameObject();
-        HealthText = new GameObject();
-
-        HealthCanvas.AddComponent<Canvas>();
-        HealthCanvas.name = "Health Canvas";
-        HealthText.AddComponent<Text>();
-        HealthText.name = "Health Text";
-
-        myCanvas = HealthCanvas.GetComponent<Canvas>();
-        myCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        HealthCanvas.AddComponent<CanvasScaler>();
-        HealthCanvas.AddComponent<GraphicRaycaster>();
-
-        HealthText.transform.parent = HealthText.transform;
-        myText = HealthText.AddComponent<Text>();
-        myText.font = (Font)Resources.Load("MyFont");
-        myText.text = _currentHealth.ToString();
-        myText.fontSize = 100;
+        HealthText.text = _currentHealth.ToString();
+        gameObject.GetComponentInChildren<Canvas>().worldCamera = myCamera;
     }
 
     public void TakeDamage(int damageTaken)

@@ -172,7 +172,7 @@ public class GameManager : MonoBehaviour
         newPlayer.transform.localScale = new Vector3(Global.Instance.SquareScale, Global.Instance.SquareScale, 1);
         newPlayer.GetComponent<Player>().Spawn(playerSpawnPos);
         newPlayer.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
-        newPlayer.GetComponent<FamilyMember>().HealthMonitor(newPlayer.transform);
+        newPlayer.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
         _family.Add(newPlayer.GetComponent<FamilyMember>());
     }
 
