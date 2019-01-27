@@ -40,7 +40,10 @@ public class FamilyBehavior : MonoBehaviour
         {
             _direction = Vector3.Normalize(_playerPosition.position - transform.position);
 
-            transform.position += _direction * _speed * Time.deltaTime;
+            if (Vector3.Magnitude(_playerPosition.position - transform.position) > 3.5)
+            {
+                transform.position += _direction * _speed * Time.deltaTime;
+            }
 
             _remainingAttention -= Time.deltaTime;
             if (_remainingAttention <= 0)
@@ -56,7 +59,7 @@ public class FamilyBehavior : MonoBehaviour
                 _walkTime -= Time.deltaTime;
                 transform.position += _direction * _speed * Time.deltaTime;
 
-                if (_walkTime <= 0 || Vector3.Magnitude(transform.position - _destination) <= 0.75f)
+                if (_walkTime <= 0 || Vector3.Magnitude(transform.position - _destination) <= 1.5f)
                 {
                     _isWalking = false;
 
