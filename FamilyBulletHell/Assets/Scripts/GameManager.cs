@@ -103,12 +103,12 @@ public class GameManager : MonoBehaviour
         childTypeChance = Random.Range(0.0f, 1.0f);
         if (childTypeChance <= 0.5f)
         {
-            newChild = Instantiate(_player);
+            newChild = Instantiate(familyMemberPrefabs[0]);
             newChild.transform.localScale = new Vector3(Global.Instance.SquareScale / 2, Global.Instance.SquareScale / 2, 1);
         }
         else
         {
-            newChild = Instantiate(_coparent);
+            newChild = Instantiate(familyMemberPrefabs[1]);
             newChild.transform.localScale = new Vector3(Global.Instance.TriangleScale / 2, Global.Instance.TriangleScale / 2, 1);
         }
         
