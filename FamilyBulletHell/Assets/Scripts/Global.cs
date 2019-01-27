@@ -20,6 +20,13 @@ public class Global : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown("Esc"))
+        {
+            Application.Quit();
+        }
+    }
 
     public float childSpawnTimeMin = 2.0f;
     public float childSpawnTimeMax = 15.0f;
