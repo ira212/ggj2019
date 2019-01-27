@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private GameObject _coparent;
 
     private GameObject newPlayer;
+    private GameObject newChild;
 
     private float _gestationTimer;
     private bool _gestating;
@@ -97,6 +98,26 @@ public class GameManager : MonoBehaviour
     void SpawnChild()
     {
         Debug.Log("Spawn child");
+        Vector3 playerSpawnPos = newPlayer.transform.position;
+        float childTypeChance;
+        childTypeChance = Random.Range(0.0f, 1.0f);
+        if (childTypeChance <= 0.5f)
+        {
+            newChild = Instantiate(_player);
+            newChild.transform.localScale = new Vector3(Global.Instance.SquareScale / 2, Global.Instance.SquareScale / 2, 1);
+        }
+        else
+        {
+            newChild = Instantiate(_coparent);
+            newChild.transform.localScale = new Vector3(Global.Instance.TriangleScale / 2, Global.Instance.TriangleScale / 2, 1);
+        }
+        
+        newChild.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, false);
+        newChild.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
+        _family.Add(newPlayer.GetComponent<FamilyMember>());
+        _coparent.AddComponent<FamilyBehavior>();
+        _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -25, 25, -20, 20);
+        newChild.transform.position = playerSpawnPos;
 
     }
 

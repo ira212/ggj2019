@@ -59,6 +59,7 @@ public class Global : MonoBehaviour
 
     //after being clicked, how long the target keeps following the player
     public float TriangleAttSpan = 6.0f;
+    public float ChildAttenSpan = 3.0f;
     public float ChildAttenSpanMIn = 2.0f;
     public float ChildAttenSpanMax = 4.0f;
 
