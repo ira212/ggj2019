@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TweakablesMenu.unity
     guid: 663b43b8a74dca84799534cad304dd6b
   - enabled: 1
+    path: Assets/Scenes/Instructions.unity
+    guid: f686c446500d74c419f28c0700aee19d
+  - enabled: 1
     path: Assets/Scenes/Gameplay.unity
     guid: edeab6c3490c73f40b05cfcf07716bdd
   - enabled: 1

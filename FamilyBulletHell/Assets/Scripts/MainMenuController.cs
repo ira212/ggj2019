@@ -14,4 +14,13 @@ public class MainMenuController : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName: "TweakablesMenu");
     }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(sceneName: "MainMenu");
+    }
+    public void Instructions()
+    {
+        SceneManager.LoadScene(sceneName: "Instructions");
+    }
 }
