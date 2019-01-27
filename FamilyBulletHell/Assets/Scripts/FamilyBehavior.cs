@@ -55,7 +55,7 @@ public class FamilyBehavior : MonoBehaviour
                 _walkTime -= Time.deltaTime;
                 transform.position += _direction * _speed * Time.deltaTime;
 
-                if (_walkTime <= 0 || Vector3.Magnitude(transform.position - _destination) <= 0.5f)
+                if (_walkTime <= 0 || Vector3.Magnitude(transform.position - _destination) <= 0.75f)
                 {
                     _isWalking = false;
 
