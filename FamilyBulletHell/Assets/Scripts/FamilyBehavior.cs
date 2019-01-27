@@ -46,6 +46,7 @@ public class FamilyBehavior : MonoBehaviour
             if (_remainingAttention <= 0)
             {
                 _followingPlayer = false;
+                _direction = Vector3.Normalize(_destination - transform.position);
             }
         }
         else
