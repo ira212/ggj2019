@@ -17,6 +17,7 @@ public class PlayAgain : MonoBehaviour
     public void SceneChange()
     {
         Global.Instance.FinalScore = 0;
+        Global.Instance.ChildrenNumber = 0;
         SceneManager.LoadScene(sceneName: "MainMenu");
     }
 }
