@@ -269,7 +269,6 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         // Lose the game.
-        Global.Instance.FinalScore = _intScore;
         SceneManager.LoadScene("GameOver");
     }
 
@@ -303,8 +302,8 @@ public class GameManager : MonoBehaviour
         }
 
         _score = _score + Time.deltaTime;
-        _intScore = (int)_score;
-        _scoreText.text ="Score: " + _intScore.ToString();
+        Global.Instance.FinalScore = (int)_score;
+        _scoreText.text ="Score: " + Global.Instance.FinalScore.ToString();
 
         _healthText.text = "Health: " + newPlayer.GetComponent<FamilyMember>().GetHealth().ToString();
         _coparentHealthText.text = "Partner Health: " + _coparent.GetComponent<FamilyMember>().GetHealth().ToString();

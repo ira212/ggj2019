@@ -20,11 +20,14 @@ public class GoalArea : MonoBehaviour
     private float _areaRespawnTimer;
     private float _respawnTimeRemaining;
 
+    private float _pointsTimer;
+
     private Collider _areaCollider;
 
     private void Start()
     {
         _areaCollider = GetComponent<Collider>();
+        _pointsTimer = 0.0f;
     }
 
     public void ActivateGoalArea(Vector3 spawnPos, float duration, float healDelay)
@@ -51,6 +54,11 @@ public class GoalArea : MonoBehaviour
     {
         if (_isActive)
         {
+            _pointsTimer += Time.deltaTime;
+            if(_pointsTimer >= 1.0f)
+            {
+                Global.Instance.FinalScore = Global.Instance.FinalScore + Global.Instance.GoalScorePerSecond;
+            }
             _duration -= Time.deltaTime;
             if (_duration <= 0)
             {

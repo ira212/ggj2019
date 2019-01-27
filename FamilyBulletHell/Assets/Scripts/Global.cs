@@ -38,6 +38,7 @@ public class Global : MonoBehaviour
     public int StartHP = 10;
     //1HP happens every X seconds. 1st heal starts at 5 seconds, not 0.
     public float GoalAreaHeal = 5.0f;
+    public int GoalScorePerSecond = 10;
 
     public float ShieldRespawnTime = 8.0f;
     public float ShieldHPmax = 20.0f;
