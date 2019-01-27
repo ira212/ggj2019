@@ -151,7 +151,7 @@ public class GameManager : MonoBehaviour
         _coparent.GetComponent<FamilyMember>().SpawnFamilyMember(Global.Instance.StartHP, Global.Instance.TriangleSpeed, true);
         _coparent.GetComponent<FamilyMember>().OnFamilyMemberDeath += GameOver;
         _coparent.AddComponent<FamilyBehavior>();
-        _coparent.GetComponent<FamilyBehavior>().InitBehavior(Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -25, 25, -20, 20);
+        _coparent.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.TriangleAttSpan, Global.Instance.TriangleSpeed, -25, 25, -20, 20);
         _family.Add(_coparent.GetComponent<FamilyMember>());
     }
 
@@ -254,6 +254,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
+            {
+                FamilyBehavior behave = hit.collider.GetComponent<FamilyBehavior>();
+                if (behave != null)
+                {
+                    behave.GrabAttention();
+                }
+            }
+        }
+
         // Spawn bullet
         if (_bulletSpawnTimer > 0)
         {
