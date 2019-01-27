@@ -859,5 +859,10 @@ PrefabInstance:
       propertyPath: TriangleScale
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 6859385857670639185, guid: 896d8ae87b91b5c40b744b4c89cc48f4,
+        type: 3}
+      propertyPath: ChildSpeed
+      value: 23
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 896d8ae87b91b5c40b744b4c89cc48f4, type: 3}
