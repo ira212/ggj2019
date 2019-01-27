@@ -121,7 +121,6 @@ public class GameManager : MonoBehaviour
         newChild.AddComponent<FamilyBehavior>();
         newChild.GetComponent<FamilyBehavior>().InitBehavior(_family[0].transform, Global.Instance.ChildAttenSpan, Global.Instance.ChildSpeed, -22, 22, -16, 18);
         newChild.GetComponent<FamilyMember>().HealthMonitor(Camera.main);
-        newChild.transform.localScale = new Vector3(Global.Instance.ChildScale, Global.Instance.ChildScale, 1);
         newChild.transform.position = playerSpawnPos;
         _family.Add(newPlayer.GetComponent<FamilyMember>());
 
