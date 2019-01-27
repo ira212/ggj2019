@@ -22,7 +22,7 @@ public class Global : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown("Esc"))
+        if (Input.GetKeyDown("escape"))
         {
             Application.Quit();
         }
