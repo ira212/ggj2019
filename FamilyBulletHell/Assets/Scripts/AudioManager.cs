@@ -102,12 +102,13 @@ public class AudioManager
         }
     }
 
-    public void PlayMusic(string musicID, float fadeDuration = 0.25f)
+    public void PlayMusic(string musicID, float vol = 1.0f, float fadeDuration = 0.25f)
     {
         AudioSource source;
         if (_audioSources.TryGetValue(musicID.ToLower(), out source))
         {
             source.Play();
+            source.volume = vol;
             _playingMusic.Add(source);
         }
     }
